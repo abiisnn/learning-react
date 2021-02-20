@@ -1,0 +1,86 @@
+<html>
+    <body>
+        <div id="root"></div>
+
+        <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+        <script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
+        <script type="text/babel">
+            
+            // This code isn't working correctly cause firstName is a boolean
+            // function SayHello({firstName, lastName}) {
+            //     return (
+            //         <div className="container">
+            //             Hello {firstName} {lastName}!
+            //         </div>
+            //     )
+            // }
+            // const element = <SayHello firstName={false} />
+            
+            // We can validate it!
+            // ----------------> First way to validate it:
+            // function SayHello({firstName, lastName}) {
+            //     return (
+            //         <div className="container">
+            //             Hello {firstName} {lastName}!
+            //         </div>
+            //     )
+            // }
+            // // With propTypes we can validate types
+            // SayHello.propTypes = {
+            //     firstName(props, propName, componentName) { // We are validating that firstName is a string
+            //         if(typeof props[propName] !== 'string') {
+            //             return new Error(`Component ${componentName} needs the prop ${propName} to be a string, but you passed a ${typeof props[propName]}`)
+            //         }
+            //     }
+            // }
+            // const element = <SayHello firstName={false} />
+
+            // ----------------> Second way to validate it:
+            /*function SayHello({firstName, lastName}) {
+                return (
+                    <div className="container">
+                        Hello {firstName} {lastName}!
+                    </div>
+                )
+            }
+
+            const PropTypes = {
+                string(props, propName, componentName) { // We are validating that firstName is a string
+                    if(typeof props[propName] !== 'string') {
+                        return new Error(`Component ${componentName} needs the prop ${propName} to be a string, but you passed a ${typeof props[propName]}`)
+                    }
+                }
+            }
+
+            SayHello.propTypes = {
+                firstName: PropTypes.string,
+                lastName: PropTypes.string
+            }
+            const element = <SayHello firstName={false} />
+            */
+
+            
+            // -----------------> Third way to validate it:
+            function SayHello({firstName, lastName}) {
+                return (
+                    <div>
+                        Hello {firstName} {lastName}!
+                    </div>
+                )
+            }
+
+            // Add prop-types.js in script src
+
+            // You can also make that a parameter is requiered, in this case lastName is required
+            SayHello.propTypes = {
+                firstName: PropTypes.string,
+                lastName: PropTypes.string.isRequired
+            }
+            const element = <SayHello firstName={false} />
+
+            ReactDOM.render(element, document.getElementById('root'))
+        </script>
+    </body>
+</html>
